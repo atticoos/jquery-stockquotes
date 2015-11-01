@@ -1,4 +1,6 @@
 (function ($) {
+  'use strict';
+
   var SYMBOL_ENDPOINT = 'http://dev.markitondemand.com/Api/v2/Quote/jsonp';
   var PENDING_QUOTE_DELAY = 200;
   var DEFAULT_OPTIONS = {
@@ -120,4 +122,4 @@
       }
     });
   };
-}).call(this, jQuery);
+})(jQuery);
