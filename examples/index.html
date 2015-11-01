@@ -6,10 +6,56 @@
   <body>
 
     <h2>jQuery Stock Symbols</h2>
-
     <br/>
-    Telsa: <span class="stock-quote" data-symbol="TSLA"></span><br/>
-    Trip: <span class="stock-quote" data-symbol="TRIP"></span>
+
+    <div class="item">
+      <span class="title">Twitter:</span>
+      <span class="stock-quote" data-symbol="TWTR"></span>
+    </div>
+    <div class="item">
+      <span class="title">Facebook:</span>
+      <span class="stock-quote" data-symbol="FB"></span>
+    </div>
+    <div class="item">
+      <span class="title">Google:</span>
+      <span class="stock-quote" data-symbol="GOOGL"></span>
+    </div>
+    <div class="item">
+      <span class="title">Netflix:</span>
+      <span class="stock-quote" data-symbol="NFLX"></span>
+    </div>
+    <div class="item">
+      <span class="title">Yahoo:</span>
+      <span class="stock-quote" data-symbol="YHOO"></span>
+    </div>
+
+    <style type="text/css">
+    body {
+      font-family: Helvetica;
+      font-size: 26px;
+    }
+    .item {
+      margin-bottom: 10px;
+      line-height: 32px;
+    }
+    .item .title {
+      width: 160px;
+      display: inline-block;
+      text-align: right;
+      margin-right: 10px;
+    }
+
+    .stock-quote.up .change {
+      border-bottom-width: 10px;
+    }
+    .stock-quote.down .change {
+      border-top-width: 10px;
+    }
+    .stock-quote .change {
+      border-left-width: 8px;
+      border-right-width: 8px;
+    }
+    </style>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../dist/jquery.stockquotes.js"></script>
