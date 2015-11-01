@@ -15,5 +15,8 @@
   "undef": true,
   "trailing": true,
   "smarttabs": true,
-  "sub": true
+  "sub": true,
+  "globals": {
+    "jQuery": true
+  }
 }

@@ -8,13 +8,12 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     autoprefixer = require('gulp-autoprefixer'),
-    mocha = require('gulp-mocha'),
     jscs = require('gulp-jscs'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish');
 
 gulp.task('js', function () {
-  gulp.src('src/scripts/**/*.js')
+  gulp.src('src/**/*.js')
   .pipe(plumber({
     errorHandler: notify.onError({
       title: 'Gulp',
@@ -26,14 +25,14 @@ gulp.task('js', function () {
 });
 
 gulp.task('js:min', function () {
-  gulp.src('src/scripts/**/*.js')
+  gulp.src('src/**/*.js')
   .pipe(concat('jquery-stockquotes.min.js'))
   .pipe(uglify())
   .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('less', function () {
-  gulp.src('src/styles/main.less')
+  gulp.src('src/main.less')
   .pipe(plumber({
     errorHandler: notify.onError({
       title: 'Gulp',
@@ -47,7 +46,7 @@ gulp.task('less', function () {
 });
 
 gulp.task('less:min', function () {
-  gulp.src('src/styles/main.less')
+  gulp.src('src/main.less')
   .pipe(less())
   .pipe(autoprefixer())
   .pipe(minifyCss())
@@ -56,32 +55,20 @@ gulp.task('less:min', function () {
 });
 
 gulp.task('jshint', function () {
-  gulp.src('src/scripts/**/*.js')
+  gulp.src('src/**/*.js')
   .pipe(jshint('.jshintrc'))
   .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('jscs', function () {
-  gulp.src('src/scripts/**/*.js')
+  gulp.src('src/**/*.js')
   .pipe(jscs());
 });
 
-gulp.task('unittest', function () {
-  gulp.src('test/spec/**/*.js')
-  .pipe(plumber({
-    errorHandler: notify.onError({
-      title: 'Gulp',
-      message: 'Unit tests failed'
-    })
-  }))
-  .pipe(mocha({reporter: 'spec', growl: 'true'}));
-});
-
-
 gulp.task('build', ['js', 'js:min', 'less', 'less:min']);
-gulp.task('test', ['jshint', 'jscs', 'unittest']);
+gulp.task('test', ['jshint', 'jscs']);
 gulp.task('watch', ['build'], function () {
-  gulp.watch('src/scripts/**/*.js', ['unittest', 'js']);
-  gulp.watch('src/styles/**/*.less', ['less']);
+  gulp.watch('src/**/*.js', ['js']);
+  gulp.watch('src/**/*.less', ['less']);
 });
 gulp.task('default', ['watch']);
