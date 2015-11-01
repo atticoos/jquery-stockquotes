@@ -20,19 +20,19 @@ gulp.task('js', function () {
       message: 'Failed to build JS'
     })
   }))
-  .pipe(concat('jquery-stockquotes.js'))
+  .pipe(concat('jquery.stockquotes.js'))
   .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('js:min', function () {
   gulp.src('src/**/*.js')
-  .pipe(concat('jquery-stockquotes.min.js'))
+  .pipe(concat('jquery.stockquotes.min.js'))
   .pipe(uglify())
   .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('less', function () {
-  gulp.src('src/main.less')
+  gulp.src('src/stockquotes.less')
   .pipe(plumber({
     errorHandler: notify.onError({
       title: 'Gulp',
@@ -41,16 +41,16 @@ gulp.task('less', function () {
   }))
   .pipe(less())
   .pipe(autoprefixer())
-  .pipe(rename('jquery-stockquotes.css'))
+  .pipe(rename('jquery.stockquotes.css'))
   .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('less:min', function () {
-  gulp.src('src/main.less')
+  gulp.src('src/stockquotes.less')
   .pipe(less())
   .pipe(autoprefixer())
   .pipe(minifyCss())
-  .pipe(rename('jquery-stockquotes.min.css'))
+  .pipe(rename('jquery.stockquotes.min.css'))
   .pipe(gulp.dest('dist/'));
 });
 
