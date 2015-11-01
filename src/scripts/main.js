@@ -3,7 +3,10 @@
   var DEFAULT_OPTIONS = {
     positiveClass: 'up',
     negativeClass: 'down',
-    precision: 2
+    changeClass: 'change',
+    quoteClass: 'quote',
+    precision: 2,
+    includeSymbol: true
   };
   var symbols = {};
 
@@ -55,8 +58,16 @@
 
 
   function StockSymbolElement (element, symbol, options) {
-    this.$element = $(element);
     this.options = $.extend({}, DEFAULT_OPTIONS, options);
+    this.$element = $(element);
+    if (this.options.includeSymbol) {
+      this.$element.append(symbol);
+    }
+    this.$element.append(' ');
+    this.$change = $('<span />').addClass(this.options.changeClass);
+    this.$quote = $('<span />').addClass(this.options.quoteClass);
+    this.$element.append(this.$change);
+    this.$element.append(this.$quote);
     addSymbolElement(symbol, this);
     updateSymbols(symbol);
   }
@@ -71,7 +82,7 @@
     } else if (quote.Change < 0) {
       this.$element.addClass(this.options.negativeClass);
     }
-    this.$element.html(Math.abs(quote.Change).toFixed(this.options.precision));
+    this.$quote.html(Math.abs(quote.Change).toFixed(this.options.precision));
   };
 
   $.fn.stockQuote = function (options) {
