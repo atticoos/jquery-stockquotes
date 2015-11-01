@@ -2,7 +2,8 @@
   var SYMBOL_ENDPOINT = 'http://dev.markitondemand.com/Api/v2/Quote/jsonp';
   var DEFAULT_OPTIONS = {
     positiveClass: 'up',
-    negativeClass: 'down'
+    negativeClass: 'down',
+    precision: 2
   };
   var symbols = {};
 
@@ -70,7 +71,7 @@
     } else if (quote.Change < 0) {
       this.$element.addClass(this.options.negativeClass);
     }
-    this.$element.html(Math.abs(quote.Change));
+    this.$element.html(Math.abs(quote.Change).toFixed(this.options.precision));
   };
 
   $.fn.stockQuote = function (options) {
