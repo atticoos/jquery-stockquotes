@@ -2,15 +2,20 @@
 ![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)
 [![Build Status](http://img.shields.io/travis/ajwhite/jquery-stockquotes.svg?style=flat)](http://travis-ci.org/ajwhite/jquery-stockquotes)
 
-## Example
+![jquery-stockquotes](https://cloud.githubusercontent.com/assets/656630/10867761/357dbdcc-8042-11e5-9c35-6c560a6c4d9d.png)
+
+
+## Usage
 ```html
-Tesla: <span class="stock-quote" data-symbol="TSLA"></span><br/>
-Trip: <span class="stock-quote" data-symbol="TRIP"></span>
+Twitter:  <span class="stock-quote" data-symbol="TWTR"></span>
+Facebook: <span class="stock-quote" data-symbol="FB"></span>
+Google:   <span class="stock-quote" data-symbol="GOOGL"></span>
+Netflix:  <span class="stock-quote" data-symbol="NTFLX"></span>
+Yahoo:    <span class="stock-quote" data-symbol="YHOO"></span>
 ```
 ```js
 $('.stock-quote').stockQuotes();
 ```
-![example](https://cloud.githubusercontent.com/assets/656630/10867657/6355a748-803b-11e5-96f0-c7444c0b3f01.png)
 
 ## Installation
 ```
@@ -26,3 +31,9 @@ $('.stock-quote').stockQuotes({
   includeSymbol: true // if the symbol should be added to the output
 });
 ```
+
+
+### Todo
+- [ ] configure additional display items (mkt cap, etc)
+- [ ] explore another API, as the current on rate-limits
+- [ ] unit tests
