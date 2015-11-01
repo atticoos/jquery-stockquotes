@@ -1,16 +1,19 @@
+@green: #91ca55;
+@red: #fd4b46;
+
 .stock-quote {
   &.up {
-    color: green;
+    color: @green;
     .change {
       display: inline-block;
-      border-bottom: 8px solid green;
+      border-bottom: 8px solid @green;
     }
   }
   &.down {
-    color: red;
+    color: @red;
     .change {
       display: inline-block;
-      border-top: 8px solid red;
+      border-top: 8px solid @red;
     }
   }
 

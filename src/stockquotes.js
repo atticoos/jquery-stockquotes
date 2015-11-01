@@ -96,7 +96,6 @@
     this.$element.append(this.$change);
     this.$element.append(this.$quote);
     addSymbolElement(symbol, this);
-    updateSymbols(symbol);
   }
 
   StockSymbolElement.prototype.updateQuote = function (quote) {
