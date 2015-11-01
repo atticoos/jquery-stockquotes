@@ -1,4 +1,6 @@
 # jquery-stockquotes
+![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)
+[![Build Status](http://img.shields.io/travis/ajwhite/jquery-stockquotes.svg?style=flat)](http://travis-ci.org/ajwhite/jquery-stockquotes)
 
 ## Example
 ```html
