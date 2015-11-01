@@ -18,8 +18,14 @@ $('.stock-quote').stockQuotes();
 ```
 
 ## Installation
+Add the package via bower
 ```
-bower install jquery-stockquotes
+bower install jquery-stockquotes --save
+```
+Link the resources
+```html
+<link rel="stylesheet" type="text/css" href="/bower_components/jquery-stockquotes/dist/jquery.stockquotes.css" />
+<script type="text/javascript" src="/bower_components/jquery-stockquotes/dist/jquery.stockquotes.js"></script>
 ```
 
 ## Options
