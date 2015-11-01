@@ -1,6 +1,6 @@
 (function ($) {
   var SYMBOL_ENDPOINT = 'http://dev.markitondemand.com/Api/v2/Quote/jsonp';
-  var DEFAULTS = {
+  var DEFAULT_OPTIONS = {
     positiveClass: 'up',
     negativeClass: 'down'
   };
@@ -55,7 +55,7 @@
 
   function StockSymbolElement (element, symbol, options) {
     this.$element = $(element);
-    this.options =
+    this.options = $.extend({}, DEFAULT_OPTIONS, options);
     addSymbolElement(symbol, this);
     updateSymbols(symbol);
   }
@@ -74,7 +74,7 @@
   };
 
   $.fn.stockQuote = function (options) {
-    options = $.isPlainObjet(options) ? options || {};
+    options = $.isPlainObject(options) ? options : {};
     return this.each(function () {
       var symbol = $(this).attr('data-symbol');
       if (symbol) {
