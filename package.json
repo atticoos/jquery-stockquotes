@@ -1,12 +1,33 @@
 {
   "name": "jquery-stockquotes",
   "version": "1.0.0",
-  "description": "",
+  "description": "jQuery stock quote plugin",
   "license": "MIT",
-  "repository": "",
   "scripts": {
     "test": "gulp test"
   },
+  "author": {
+    "name": "Atticus White",
+    "email": "contact@atticuswhite.com",
+    "url": "http://atticuswhite.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ajwhite/jquery-stockquotes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ajwhite/jquery-stockquotes/issues"
+  },
+  "homepage": "https://github.com/ajwhite/jquery-stockquotes",
+  "keywords": [
+    "jquery",
+    "stock",
+    "quotes",
+    "symbols",
+    "stock quotes",
+    "stock symbols",
+    "jquery plugin"
+  ],
   "dependencies": {},
   "devDependencies": {
     "chai": "^3.2.0",
