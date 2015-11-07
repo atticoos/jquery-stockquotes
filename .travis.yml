@@ -1,8 +1,10 @@
 sudo: false
 language: node_js
 node_js:
-  - '0.12'
-
+- '0.12'
 cache:
   directories:
   - node_modules
+notifications:
+  slack:
+    secure: wbZxpvE9Jltgvw1Ro7WPw0JdC6EgP16YUCzrMz9Zb628AxCUiwQFvTeuKr8oST3YDvLSHR0YbwUWnBoObdk8pdXJEOKlm/GSsmJftMVipkcAxwLe672wIv8t11ltdJemA2yhV1fyDvqz2D3vWVHq4UwcTRN8Mak4aX/yP6838tB4PZsfzRyjw+0NJc0CQp1njZOtAAPfzCVCWYK25DDHLfHQakmBoBj6IyZw1YW2p1WiaZjOWA9ilxQcPebv+5jdX6SPdEaFE5RD/ynHvovwrteLyAh1cJrCg3I/hmQlCx6w74h9zpPtdmCoBBDn9lhQr6LX85x+QxTD+PIxesTqjzBfkF1JtuGvqLa2vt1sAlQ6+UCsPohH/Kj9C2MKo6kM67VS1zWnNiSCQ+Yj7nQMEykZAO2lNYFgenE8z612YZdxClK2Nhad6cCCIelZ3hxYSDkRXg4LVM6+kQOWndGr6krzLf9FjAMx9FiyKmMWnxQeqxXqL2YaYwYCZVOrn/0HrUCPzeaxFcqg4wGGLduPua9ldCH3WT1xejOWZ0hwZFzzLtCMzpDE3ikO9UiA2c4cBJwsVs5awBNE55cjaMt9P7CcjEnNFBRgsX8S09bzo36cQTChXxWctouAX3C/7eyjFWpAJMezI30Zps8ZlTsk7yM74uxjbkwyY7I6/ELWt94=
