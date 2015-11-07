@@ -21,4 +21,31 @@ describe('jquery.stockquotes', function () {
     element.stockQuote();
     expect(element.text().trim()).to.be.eql('TWTR');
   });
+
+  describe('options', function () {
+    describe('includeSymbol', function () {
+      it ('should not display the symbol if `false`', function () {
+        element.stockQuote({
+          includeSymbol: false
+        });
+        expect(element.text().trim()).to.be.eql('');
+      });
+    });
+    describe('changeClass', function () {
+      it ('should use the supplied class for the change element', function () {
+        element.stockQuote({
+          changeClass: 'foobar'
+        });
+        expect(element.children().first().hasClass('foobar')).to.be.true;
+      });
+    });
+    describe('quoteClass', function () {
+      it ('should use the supplied class for the quote element', function () {
+        element.stockQuote({
+          quoteClass: 'foobar'
+        });
+        expect(element.children().last().hasClass('foobar')).to.be.true;
+      });
+    });
+  });
 });
