@@ -10,7 +10,8 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     jscs = require('gulp-jscs'),
     jshint = require('gulp-jshint'),
-    stylish = require('jshint-stylish');
+    stylish = require('jshint-stylish'),
+    mocha = require('gulp-mocha');
 
 gulp.task('js', function () {
   gulp.src('src/**/*.js')
@@ -65,8 +66,13 @@ gulp.task('jscs', function () {
   .pipe(jscs());
 });
 
+gulp.task('unit', function () {
+  gulp.src('test/**/*.js')
+  .pipe(mocha({reporter: 'nyan'}));
+});
+
 gulp.task('build', ['js', 'js:min', 'less', 'less:min']);
-gulp.task('test', ['jshint', 'jscs']);
+gulp.task('test', ['jshint', 'jscs', 'unit']);
 gulp.task('watch', ['build'], function () {
   gulp.watch('src/**/*.js', ['js']);
   gulp.watch('src/**/*.less', ['less']);
