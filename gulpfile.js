@@ -68,7 +68,7 @@ gulp.task('jscs', function () {
 
 gulp.task('unit', function () {
   gulp.src('test/**/*.js')
-  .pipe(mocha({reporter: 'nyan'}));
+  .pipe(mocha());
 });
 
 gulp.task('build', ['js', 'js:min', 'less', 'less:min']);
