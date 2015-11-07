@@ -3,10 +3,11 @@ var expect = require('chai').expect;
 
 describe('jquery.stockquotes', function () {
   var window =  jsdom.jsdom('<html><head><script></script></head><body></body></html>').defaultView,
-      document = window.document,
       $ = global.jQuery = require('jquery')(window),
-      plugin = require('../../src/stockquotes.js'),
       element;
+
+  // load the plugin, which will bind to jQuery
+  require('../../src/stockquotes.js');
 
   beforeEach(function () {
     element = $('<span class="stock-quote" data-symbol="TWTR"></span>');

@@ -56,13 +56,13 @@ gulp.task('less:min', function () {
 });
 
 gulp.task('jshint', function () {
-  gulp.src('src/**/*.js')
+  gulp.src(['src/**/*.js', 'test/**/*.js'])
   .pipe(jshint('.jshintrc'))
   .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('jscs', function () {
-  gulp.src('src/**/*.js')
+  gulp.src(['src/**/*.js', 'test/**/*.js'])
   .pipe(jscs());
 });
 

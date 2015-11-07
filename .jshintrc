@@ -17,6 +17,9 @@
   "smarttabs": true,
   "sub": true,
   "globals": {
-    "jQuery": true
+    "jQuery": true,
+    "describe": true,
+    "beforeEach": true,
+    "it": true
   }
 }
