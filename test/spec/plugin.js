@@ -2,7 +2,7 @@ var jsdom = require('jsdom');
 var expect = require('chai').expect;
 
 describe('jquery.stockquotes', function () {
-  var window =  jsdom.jsdom('<html><head><script></script></head><body></body></html>').defaultView,
+  var window =  jsdom.jsdom().defaultView,
       $ = global.jQuery = require('jquery')(window),
       element;
 
