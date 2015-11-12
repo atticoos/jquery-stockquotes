@@ -21,6 +21,11 @@ describe('jquery.stockquotes', function () {
     element.stockQuote();
     expect(element.text().trim()).to.be.eql('TWTR');
   });
+  it ('should display the symbol as uppercase', function () {
+    element = $('<span class="stock-quote" data-symbol="twtr"></span>');
+    element.stockQuote();
+    expect(element.text().trim()).to.be.eql('TWTR');
+  });
 
   describe('options', function () {
     describe('includeSymbol', function () {
