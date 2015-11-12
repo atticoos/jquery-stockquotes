@@ -11,7 +11,8 @@ var gulp = require('gulp'),
     jscs = require('gulp-jscs'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
-    mocha = require('gulp-mocha');
+    mocha = require('gulp-mocha'),
+    istanbul = require('gulp-istanbul');
 
 gulp.task('js', function () {
   gulp.src('src/**/*.js')
@@ -69,9 +70,16 @@ gulp.task('jscs', function () {
   .pipe(jscs.reporter('fail'));
 });
 
-gulp.task('unit', function () {
+gulp.task('pre-test', function () {
+  return gulp.src('src/stockquotes.js')
+  .pipe(istanbul())
+  .pipe(istanbul.hookRequire());
+})
+
+gulp.task('unit', ['pre-test'], function () {
   gulp.src('test/**/*.js')
-  .pipe(mocha());
+  .pipe(mocha())
+  .pipe(istanbul.writeReports());
 });
 
 gulp.task('build', ['js', 'js:min', 'less', 'less:min']);
