@@ -12,7 +12,8 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
     mocha = require('gulp-mocha'),
-    istanbul = require('gulp-istanbul');
+    istanbul = require('gulp-istanbul'),
+    coveralls = require('gulp-coveralls');
 
 gulp.task('js', function () {
   gulp.src('src/**/*.js')
@@ -80,6 +81,11 @@ gulp.task('unit', ['pre-test'], function () {
   gulp.src('test/**/*.js')
   .pipe(mocha())
   .pipe(istanbul.writeReports());
+});
+
+gulp.task('coveralls', function () {
+  gulp.src('coverage/lcov.info')
+  .pipe(coveralls());
 });
 
 gulp.task('build', ['js', 'js:min', 'less', 'less:min']);

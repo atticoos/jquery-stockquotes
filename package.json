@@ -34,6 +34,7 @@
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.0.1",
     "gulp-concat": "^2.6.0",
+    "gulp-coveralls": "^0.1.4",
     "gulp-istanbul": "^0.10.2",
     "gulp-jscs": "^3.0.2",
     "gulp-jshint": "^1.11.2",
