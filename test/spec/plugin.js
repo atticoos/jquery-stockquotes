@@ -41,7 +41,7 @@ describe('jquery.stockquotes', function () {
         element.stockQuote({
           changeClass: 'foobar'
         });
-        expect(element.children().first().hasClass('foobar')).to.be.true;
+        expect(element.children().first().hasClass('foobar')).to.be.eql(true);
       });
     });
     describe('quoteClass', function () {
@@ -49,7 +49,7 @@ describe('jquery.stockquotes', function () {
         element.stockQuote({
           quoteClass: 'foobar'
         });
-        expect(element.children().last().hasClass('foobar')).to.be.true;
+        expect(element.children().last().hasClass('foobar')).to.be.eql(true);
       });
     });
   });

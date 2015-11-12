@@ -58,12 +58,15 @@ gulp.task('less:min', function () {
 gulp.task('jshint', function () {
   gulp.src(['src/**/*.js', 'test/**/*.js'])
   .pipe(jshint('.jshintrc'))
-  .pipe(jshint.reporter('jshint-stylish'));
+  .pipe(jshint.reporter('jshint-stylish'))
+  .pipe(jshint.reporter('fail'));
 });
 
 gulp.task('jscs', function () {
   gulp.src(['src/**/*.js', 'test/**/*.js'])
-  .pipe(jscs());
+  .pipe(jscs())
+  .pipe(jscs.reporter('console'))
+  .pipe(jscs.reporter('fail'));
 });
 
 gulp.task('unit', function () {
