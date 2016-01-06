@@ -1,6 +1,6 @@
 {
   "name": "jquery-stockquotes",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "jQuery stock quote plugin",
   "license": "MIT",
   "scripts": {
