@@ -12,6 +12,9 @@ describe('jquery.stockquotes', function () {
   beforeEach(function () {
     element = $('<span class="stock-quote" data-symbol="TWTR"></span>');
   });
+  it ('should support the pluralization form of the plign name', function () {
+    expect(element.stockQuote).to.be.eql(element.stockQuotes);
+  });
   it ('should generate the intial child elements', function () {
     element.stockQuote();
     expect(element.find('span.change').length).to.be.eql(1);
