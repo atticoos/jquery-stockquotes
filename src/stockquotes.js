@@ -111,7 +111,7 @@
     this.$quote.html(Math.abs(quote.Change).toFixed(this.options.precision));
   };
 
-  $.fn.stockQuote = function (options) {
+  $.fn.stockQuotes = $.fn.stockQuote = function (options) {
     options = $.isPlainObject(options) ? options : {};
     return this.each(function () {
       var symbol = $(this).attr('data-symbol');

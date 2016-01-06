@@ -10,7 +10,10 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     jscs = require('gulp-jscs'),
     jshint = require('gulp-jshint'),
-    stylish = require('jshint-stylish');
+    stylish = require('jshint-stylish'),
+    mocha = require('gulp-mocha'),
+    istanbul = require('gulp-istanbul'),
+    coveralls = require('gulp-coveralls');
 
 gulp.task('js', function () {
   gulp.src('src/**/*.js')
@@ -55,18 +58,38 @@ gulp.task('less:min', function () {
 });
 
 gulp.task('jshint', function () {
-  gulp.src('src/**/*.js')
+  gulp.src(['src/**/*.js', 'test/**/*.js'])
   .pipe(jshint('.jshintrc'))
-  .pipe(jshint.reporter('jshint-stylish'));
+  .pipe(jshint.reporter('jshint-stylish'))
+  .pipe(jshint.reporter('fail'));
 });
 
 gulp.task('jscs', function () {
-  gulp.src('src/**/*.js')
-  .pipe(jscs());
+  gulp.src(['src/**/*.js', 'test/**/*.js'])
+  .pipe(jscs())
+  .pipe(jscs.reporter('console'))
+  .pipe(jscs.reporter('fail'));
+});
+
+gulp.task('pre-test', function () {
+  return gulp.src('src/stockquotes.js')
+  .pipe(istanbul())
+  .pipe(istanbul.hookRequire());
+})
+
+gulp.task('unit', ['pre-test'], function () {
+  gulp.src('test/**/*.js')
+  .pipe(mocha())
+  .pipe(istanbul.writeReports());
+});
+
+gulp.task('coveralls', function () {
+  gulp.src('coverage/lcov.info')
+  .pipe(coveralls());
 });
 
 gulp.task('build', ['js', 'js:min', 'less', 'less:min']);
-gulp.task('test', ['jshint', 'jscs']);
+gulp.task('test', ['jshint', 'jscs', 'unit']);
 gulp.task('watch', ['build'], function () {
   gulp.watch('src/**/*.js', ['js']);
   gulp.watch('src/**/*.less', ['less']);
