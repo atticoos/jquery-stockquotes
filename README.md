@@ -14,7 +14,7 @@ Netflix:  <span class="stock-quote" data-symbol="NTFLX"></span>
 Yahoo:    <span class="stock-quote" data-symbol="YHOO"></span>
 ```
 ```js
-$('.stock-quote').stockQuotes();
+$('.stock-quote').stockQuote();
 ```
 
 ## Installation
@@ -30,7 +30,7 @@ Link the resources
 
 ## Options
 ```js
-$('.stock-quote').stockQuotes({
+$('.stock-quote').stockQuote({
   changeClass: 'change', // css class for change arrow
   quoteClass: 'quote', // css class for quote
   precision: 2, // decimal precision of change
