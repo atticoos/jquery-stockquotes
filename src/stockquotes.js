@@ -8,8 +8,10 @@
     negativeClass: 'down',
     changeClass: 'change',
     quoteClass: 'quote',
+    priceClass: 'price',
     precision: 2,
-    includeSymbol: true
+    includeSymbol: true,
+    includePrice: false
   };
   var symbols = {};
   var pendingQuoteRequest;
@@ -87,6 +89,12 @@
   function StockSymbolElement (element, symbol, options) {
     this.options = $.extend({}, DEFAULT_OPTIONS, options);
     this.$element = $(element);
+    this.$price = null;
+    if (this.options.includePrice) {
+      this.$price = $('<span />').addClass(this.options.priceClass);
+      this.$element.append(this.$price);
+      this.$element.append(' ')
+    }
     if (this.options.includeSymbol) {
       this.$element.append(symbol);
     }
@@ -107,6 +115,9 @@
       this.$element.addClass(this.options.positiveClass);
     } else if (quote.Change < 0) {
       this.$element.addClass(this.options.negativeClass);
+    }
+    if (this.$price) {
+      this.$price.html('$' + Math.abs(quote.LastPrice).toFixed(this.options.precision));
     }
     this.$quote.html(Math.abs(quote.Change).toFixed(this.options.precision));
   };
