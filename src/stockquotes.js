@@ -2,6 +2,7 @@
   'use strict';
 
   var SYMBOL_ENDPOINT = 'http://dev.markitondemand.com/Api/v2/Quote/jsonp';
+  var EXCHANGE_RATE_ENDPOINT = 'https://api.fixer.io/latest';
   var PENDING_QUOTE_DELAY = 200;
   var DEFAULT_OPTIONS = {
     positiveClass: 'up',
@@ -9,11 +10,16 @@
     changeClass: 'change',
     quoteClass: 'quote',
     priceClass: 'price',
+    currency: 'USD',
     precision: 2,
     includeSymbol: true,
     includePrice: false
   };
   var symbols = {};
+  var currencySymbols = {};
+  var exchangeRates = {
+    USD: 1
+  };
   var pendingQuoteRequest;
 
   /**
@@ -25,11 +31,37 @@
     }
     symbols[symbol].push(element);
 
+    resetRequest();
+  }
+
+  function resetRequest() {
     // delay looking up the symbol to avoid duplicating requests as more symbols become added
     if (pendingQuoteRequest) {
       clearTimeout(pendingQuoteRequest);
     }
-    pendingQuoteRequest = setTimeout(updateSymbols, PENDING_QUOTE_DELAY);
+    pendingQuoteRequest = setTimeout(resolvePrices, PENDING_QUOTE_DELAY);
+  }
+
+  function addForexSymbol (symbol) {
+    currencySymbols[symbol] = symbol;
+
+    resetRequest();
+  }
+
+  function getExchangeRates () {
+    // if (exchangeRates[symbol]) {
+    //   // polyfill immediate-resolve promise
+    //   return {then: cb => cb(exchangeRates[symbol])}
+    // }
+
+    return $.ajax({
+      url: EXCHANGE_RATE_ENDPOINT,
+      data: {base: 'USD', symbols: Object.keys(currencySymbols).join(',')},
+      dataType: 'jsonp',
+      method: 'GET'
+    }).then(function (response) {
+      return response;
+    });
   }
 
   /**
@@ -48,6 +80,18 @@
       return response;
     });
   }
+
+
+
+  function resolvePrices() {
+    getExchangeRates().then(function (response) {
+      exchangeRates = Object.assign({}, exchangeRates, response.rates);
+      updateSymbols()
+    }).fail(function() {
+      updateSymbols()
+    })
+  }
+
 
   /**
    * Fetches all the symbol quotes and update the corresponding elements
@@ -75,7 +119,7 @@
         for (symbol in symbols) {
           if (responses[i].Symbol === symbol) {
             for (j = 0; j < symbols[symbol].length; j++) {
-              symbols[symbol][j].updateQuote(responses[i]);
+              symbols[symbol][j].updateQuote(responses[i], exchangeRates);
             }
           }
         }
@@ -86,9 +130,10 @@
     });
   }
 
-  function StockSymbolElement (element, symbol, options) {
+  function StockSymbolElement (element, symbol, currency, options) {
     this.options = $.extend({}, DEFAULT_OPTIONS, options);
     this.$element = $(element);
+    this.currency = typeof options.currency === 'string' ? options.currency.toUpperCase() : currency;
     this.$price = null;
     if (this.options.includePrice) {
       this.$price = $('<span />').addClass(this.options.priceClass);
@@ -103,10 +148,11 @@
     this.$quote = $('<span />').addClass(this.options.quoteClass);
     this.$element.append(this.$change);
     this.$element.append(this.$quote);
+    addForexSymbol(this.currency);
     addSymbolElement(symbol, this);
   }
 
-  StockSymbolElement.prototype.updateQuote = function (quote) {
+  StockSymbolElement.prototype.updateQuote = function (quote, exchangeRates) {
     this.$element
       .removeClass(this.options.positiveClass)
       .removeClass(this.options.negativeClass);
@@ -117,7 +163,7 @@
       this.$element.addClass(this.options.negativeClass);
     }
     if (this.$price) {
-      this.$price.html('$' + Math.abs(quote.LastPrice).toFixed(this.options.precision));
+      this.$price.html('$' + Number(Math.abs(quote.LastPrice * (exchangeRates[this.currency] || 1)).toFixed(this.options.precision)).toLocaleString());
     }
     this.$quote.html(Math.abs(quote.Change).toFixed(this.options.precision));
   };
@@ -126,9 +172,11 @@
     options = $.isPlainObject(options) ? options : {};
     return this.each(function () {
       var symbol = $(this).attr('data-symbol');
+      var currency = $(this).attr('data-currency');
+      currency = typeof currency === 'string' ? currency.toUpperCase() : 'USD';
       if (symbol) {
         symbol = symbol.toUpperCase().trim();
-        $(this).data('stockquote', new StockSymbolElement(this, symbol, options));
+        $(this).data('stockquote', new StockSymbolElement(this, symbol, currency, options));
       }
     });
   };
